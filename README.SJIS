@@ -1,0 +1,98 @@
+    Java LHA library Ver 0.26  March 30 2001 by TURNER.
+
+jp.gr.java_conf.turner.util.lha.LhaInputStream は
+Java で書いたLHAデコーダです。
+jlha.jarをクラスパスに含めるなどしてご使用ください。
+
+java.util.zipパッケージに含まれるZipInputStreamにインターフェースを似せ
+てあるのでZipInputStreamの使い方がわかる方ならだいたい使い方はわかると
+思います。
+
+現在の所 lh0, lh1, lh5, lh6, lh7 の展開に成功しています。
+(lh4もたぶん大丈夫だと思いますが未確認です。)
+
+シフトJISでの日本語ファイル名に対応しています。
+（JDK1.1以降の環境で動作時のみ保証）
+
+詳しくはドキュメント docs/index.html と
+動作確認用クラスのソース lhax.java を参照してください。
+
+LHA ライブラリのシリーズとしていずれLhaOutputStreamやLhaFileも
+作る予定（？）
+
+●お約束
+
+・個人的な使用および改造については制限しません。ご自由にお使いください。
+・転載、配布は自由ですが、アーカイブの内容を変更して配布する場合は、
+　事前に作者(TURNER)の許可を得て下さい。
+（ライブラリをあらかじめ組み込んだソフトを公開する場合も一応連絡ください）
+・このソフトウェアによってユーザーが不利益を被っても、作者はその責任を
+  負いかねます。
+
+●おまけの動作確認ツールの使い方
+
+ファイル属性などは完全無視で単純に全ファイルを展開する事しかできません。
+同名のファイルがあっても警告なしに上書きしてしまうので注意してください。
+                        ~~~~~~~~~~~~~~~~
+[JLHASRC.LZHを展開する例]
+
+ 1, JDKをまずインストールしておいてください
+
+ 2, そこでlhax.classが展開された場所と同じディレクトリに移動して
+    下記のようにコマンドラインで実行してください。
+   （lhax.classがテスト用メインクラスになってます。）
+
+                 >cd jlha
+
+(Windowsの場合)  >java -classpath %CLASSPATH%;jlha.jar;. lhax JLHASRC.LZH 
+(solaris,Linux)  >java -classpath $CLASSPATH:jlha.jar:. lhax JLHASRC.LZH  
+
+下記のように最後に[v]オプションをつけると
+詳細な内容を表示しつつ展開します。
+
+(Windowsの場合)  >java -classpath %CLASSPATH%;jlha.jar;. lhax JLHASRC.LZH v 
+(solaris,Linux)  >java -classpath $CLASSPATH:jlha.jar:. lhax JLHASRC.LZH v  
+
+
+Internet Explorer4.0以降をJava込みでインストールしてあるWindowsマシンなら、
+下記でもＯＫ。
+
+      >jview /cp jlha.jar lhax JLHASRC.LZH
+
+
+更新履歴
+
+---Ver 0.26  2001/3/30--
+
+	IOExceptionのサブクラスとしてLhaExceptionを追加。
+	アーカイブファイルの問題なのか読み込み元のストリームのエラーなのか
+	多少切り分けやすくなった？
+
+---Ver 0.25  2000/5/5---
+
+	きすちょこに組み込めるように、JDK1.0環境でも一応動作するようにした。
+	ただしJDK1.0環境時に日本語のファイル名を含むアーカイブを扱った際の
+	結果は不定。
+
+---Ver 0.24  2000/5/1---
+
+	lh1用とlh4～7用のハフマンツリーを構成するクラスを共通化して
+	クラスファイルの量を削減。（ただし使用メモリ量は少し増えた）
+
+---Ver 0.23  2000/3/29---
+
+	lh1, (lh4), lh7 に対応(lh4は未確認)。
+
+	ハフマンツリーをテーブルでショートカットするようにして
+	lh4～lh7を高速化。
+
+---Ver 0.01  2000/3/23---
+
+	lh0, lh5, lh6の展開に成功。
+
+
+/*********************************
+      turner@tcn-catv.ne.jp
+http://www.tnc-catv.ne.jp/~TURNER/
+            TURNER
+*********************************/

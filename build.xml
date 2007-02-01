@@ -1,0 +1,83 @@
+<project name="MyProject" default="dist" basedir=".">
+
+	<!-- このビルドのためにグローバルプロパティを設定します -->
+	<property name="src" value="." />
+	<property name="docs" value="docs" />
+	<property name="build" value="build" />
+	<property name="distfile" value="jlha.jar" />
+
+	<property name="lhasrcarc" value="JLHASRC.LZH" />
+	<property name="lhacmd" value="lha" />
+
+	<property name="pkgename" value="jp.gr.java_conf.turner.util.lha" />
+	<property name="doctitle" value="LHAライブラリ" />
+	<!-- property name="build.compiler" value="classic" / -->
+
+
+	<target name="prepare">
+		<!-- タイムスタンプを作成します -->
+		<tstamp/>
+		<!-- コンパイルで使用するビルドディレクトリ構造を作成します -->
+		<mkdir dir="${build}" />
+	</target>
+
+	<target name="compile" depends="prepare">
+		<!-- ${src}から${build}に、Javaコードをコンパイルします -->
+		<javac classpath="." srcdir="${src}" destdir="${build}" encoding="SJIS" target="1.1" />
+	</target>
+
+	<target name="dist" depends="compile">
+		<!-- ${build}の中のすべてのファイルをMyProject-${DSTAMP}.jarファイルに格納します -->
+		<jar jarfile="${distfile}" basedir="${build}" excludes="*.class" />
+		<copy file="${build}/lhax.class" todir="." />
+	</target>
+
+	<!-- SJISのreadmeファイルからEUCバージョンを作ります。 -->
+
+	<target name="readme0">
+		<native2ascii encoding="SJIS" src="." dest="."
+			includes="README.SJIS" ext="._tmp_" />
+	</target>
+	<target name="readme1" depends="readme0">
+		<!-- SJISのreadmeファイルからEUCバージョンを作ります。 -->
+		<native2ascii reverse="on" encoding="EUCJIS" src="." dest="."
+			includes="README._tmp_" ext=".EUC" />
+	</target>
+	<target name="readme" depends="readme0,readme1">
+		<fixcrlf srcDir="." includes="README.EUC" cr="remove" />
+	</target>
+
+	<target name="javadoc" depends="compile">
+		<!-- ${docs}にjavadocドキュメントを生成します。 -->
+		<mkdir dir="${docs}" />
+		<javadoc sourcepath="${src}" destdir="${docs}" 
+			packagenames="${pkgename}"
+			doctitle="${doctitle}" Windowtitle="${doctitle}"
+			Header="${doctitle}" nohelp="on" public="on" nodeprecated="on"
+			Version="off" overview="${src}/overview.html"
+		/>
+	</target>
+
+	<target name="doc" depends="javadoc,readme" />
+
+	<target name="lhasrc" >
+		<exec executable="${lhacmd}">
+			<arg value="u -rx" />
+			<arg value="${lhasrcarc}" />
+			<arg value="lhax.java" />
+			<arg value="@javafiles" />
+		</exec>	
+	</target>
+
+
+	<target name="clean">
+		<!-- ${build}と${dist}ディレクトリツリーを削除します -->
+		<delete dir="${build}" />
+		<delete dir="${docs}" />
+		<delete file="${distfile}" />
+		<delete>
+			<fileset dir="." includes="*.EUC,*._tmp_" />
+		</delete>
+		<delete file="${lhasrcarc}" />
+	</target>
+</project>
