@@ -1,9 +1,12 @@
 
 
-import java.awt.*;
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
-import jp.gr.java_conf.turner.util.lha.*;
+import jp.gr.java_conf.turner.util.lha.LhaEntry;
+import jp.gr.java_conf.turner.util.lha.LhaInputStream;
 
 /**
  * Lhaライブラリ動作テストクラス

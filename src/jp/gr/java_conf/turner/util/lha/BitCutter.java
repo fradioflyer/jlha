@@ -273,7 +273,6 @@ class BitCutter extends InputStream{
 	protected int getClusterLen(int check_bit)
 		throws IOException
 	{
-		int c;
 		int ret;
 		int mask;
 		boolean check_bool;

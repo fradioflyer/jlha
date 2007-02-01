@@ -17,8 +17,6 @@ import java.io.*;
  */
 class StaticHuffmanC extends StaticHuffman
 {
-	private StaticHuffman huffman;
-
 	/**
 	 * コード用静的ハフマン辞書のコンストラクタ.
 	 * 

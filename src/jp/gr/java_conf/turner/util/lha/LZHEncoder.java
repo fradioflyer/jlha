@@ -7,8 +7,7 @@
 
 package jp.gr.java_conf.turner.util.lha;
 
-import java.io.*;
-import java.util.*;
+import java.io.IOException;
 
 class LZHEncoder extends LZHSlideDic {
 

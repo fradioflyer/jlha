@@ -421,7 +421,6 @@ public class LhaEntry implements Cloneable, LhaConstants{
 						//レベル２では全ヘッダの大きさ
 		int hd_sum; 	//ヘッダのチェックサム
 		int fname_len;	//ファイル名の長さ
-		long skip_size; //スキップサイズ
 		int extlen = 0; //拡張ヘッダ１つの大きさ
 
 		hd_level = work[20];
@@ -430,7 +429,7 @@ public class LhaEntry implements Cloneable, LhaConstants{
 			hd_size = (0xFF & work[0]);
 			hd_sum	= (0xFF & work[1]);
 			cmp_method = newString( work, 2, 5, null );
-			skip_size = cmp_size = get32( work, 7 );
+			cmp_size = get32( work, 7 );
 			org_size = get32( work, 11 );
 
 			time = dosToJavaTime( get32( work, 15 ) );
@@ -475,7 +474,7 @@ public class LhaEntry implements Cloneable, LhaConstants{
 			hd_size = (0xFF & work[0]);
 			hd_sum	= (0xFF & work[1]);
 			cmp_method = newString( work, 2, 5, null );
-			skip_size = cmp_size = get32( work, 7 );
+			cmp_size = get32( work, 7 );
 			org_size = get32( work, 11 );
 			time = dosToJavaTime( get32( work, 15 ) );
 			attrib = (byte)(0xFF&work[19]);		   //level1ヘッダでは本来ここは0x20固定
@@ -501,7 +500,7 @@ public class LhaEntry implements Cloneable, LhaConstants{
 		case 2:
 			hd_size = get16( work, 0 );
 			cmp_method = newString( work, 2, 5, null );
-			skip_size = cmp_size = get32( work, 7 );
+			cmp_size = get32( work, 7 );
 			org_size = get32( work, 11 );
 			time = get32( work, 15 )*1000;
 			attrib = (byte)(0xFF&work[19]);			//level2ヘッダでは本来ここは0x20固定

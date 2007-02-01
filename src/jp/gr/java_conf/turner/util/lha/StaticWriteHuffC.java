@@ -17,8 +17,6 @@ import java.io.*;
  */
 class StaticWriteHuffC extends StaticWriteHuff
 {
-	private StaticWriteHuff writehuff;
-
 	/**
 	 * コード用静的ハフマン辞書のコンストラクタ.
 	 * 

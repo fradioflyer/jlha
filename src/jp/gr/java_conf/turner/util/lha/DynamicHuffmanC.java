@@ -7,7 +7,6 @@
 
 package jp.gr.java_conf.turner.util.lha;
 
-import java.io.*;
 
 class DynamicHuffmanC extends DynamicHuffman
 {
@@ -41,8 +40,6 @@ class DynamicHuffmanC extends DynamicHuffman
 			nodes[j] = branch_wk;
 			nodes[j].index = j;
 
-			int freq_wk = branch_wk.freq = nodes[i].freq + nodes[i-1].freq;
-			
 			branch_wk.child_0 = nodes[i];
 			branch_wk.child_1 = nodes[i-1];
 
