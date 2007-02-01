@@ -1,9 +1,4 @@
-/*
- * $RCSfile: lhax.java,v $ $Date: 2000/04/15 17:28:07 $ 
- * Ver. $Name:  $  Source revision. $Revision: 1.1.1.1 $
- *
- * Copyright 2000 by TURNER.
- */
+
 
 import java.awt.*;
 import java.io.*;
